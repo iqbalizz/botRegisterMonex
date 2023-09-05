@@ -2,6 +2,7 @@ import fetch from "node-fetch";
 import faker from "faker";
 import readlineSync from "readline-sync";
 import chalk from "chalk";
+import { banner1 } from "./src/banner.js";
 
 //!FUNCTION GET RANDOM NAME
 function generateRandomIndonesianName() {
@@ -105,6 +106,7 @@ const registerAccount = (Name, randomPhone, inputReffCode, cookie) => new Promis
     // // console.log(resultCookie)
     // const generateCookie = resultCookie.cookie;
     // const cookie = generateCookie[0].split(";")[0];
+    console.log(banner1());
     let inputReffCode;
     let inputJumlahReff;
     if (inputJumlahReff !== 0) {
