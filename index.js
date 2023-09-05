@@ -57,7 +57,7 @@ const getCookie = () => new Promise((resolve, reject) => {
 });
 
 const registerAccount = (Name, randomPhone, cookie) => new Promise((resolve, reject) => {
-    const dataString = `{"password":"${Name}32112345","spassword":"${Name}32112345","mobile":"${randomPhone}","t_mobile":"8449","code":"","agent":10000,"token":null,"language":"id_ind"}`
+    const dataString = `{"password":"HaloBrow32112345","spassword":"${Name}32112345","mobile":"${randomPhone}","t_mobile":"8449","code":"","agent":10000,"token":null,"language":"id_ind"}`
     fetch(`https://monex-in.com/api/api/index/register`, {
         method: 'POST',
         headers: {
