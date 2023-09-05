@@ -56,8 +56,8 @@ const getCookie = () => new Promise((resolve, reject) => {
         .catch(error => reject(error))
 });
 
-const registerAccount = (Name, randomPhone, cookie) => new Promise((resolve, reject) => {
-    const dataString = `{"password":"HaloBrow32112345","spassword":"${Name}32112345","mobile":"${randomPhone}","t_mobile":"8449","code":"","agent":10000,"token":null,"language":"id_ind"}`
+const registerAccount = (Name, randomPhone, inputReffCode, cookie) => new Promise((resolve, reject) => {
+    const dataString = `{"password":"HaloBrow32112345","spassword":"${Name}32112345","mobile":"${randomPhone}","t_mobile":"${inputReffCode}","code":"","agent":10000,"token":null,"language":"id_ind"}`
     fetch(`https://monex-in.com/api/api/index/register`, {
         method: 'POST',
         headers: {
@@ -105,9 +105,11 @@ const registerAccount = (Name, randomPhone, cookie) => new Promise((resolve, rej
     // // console.log(resultCookie)
     // const generateCookie = resultCookie.cookie;
     // const cookie = generateCookie[0].split(";")[0];
+    let inputReffCode;
     let inputJumlahReff;
     if (inputJumlahReff !== 0) {
         console.log(`[!] ${chalk.green(`Berhasil mendapatkan cookie`)}`)
+        inputReffCode = readlineSync.question(`[?] Masukkan Refferal Kode (Cth : 8449) : `)
         inputJumlahReff = readlineSync.question(`[?] Masukkan Jumlah reff : `);
         for (let i = 0; i < inputJumlahReff; i++) {
             const getName = await generateRandomIndonesianName();
@@ -123,14 +125,14 @@ const registerAccount = (Name, randomPhone, cookie) => new Promise((resolve, rej
             // console.log(cookie)
 
             console.log(`[!] ${chalk.yellow(`Procces Refferal ke-${i + 1}`)}`)
-            const registAcc = await registerAccount(Name, getPhoneNumber, cookie);
+            const registAcc = await registerAccount(Name, getPhoneNumber, inputReffCode, cookie);
             const resultBody = registAcc.body;
             const statusRegister = resultBody.info.id_ind;
             const token = resultBody.data.token;
             console.log(`[!] Status Register : ${chalk.green(statusRegister)}!`)
             // console.log(token)
-            await delay(3000)
+            await delay(2000)
         }
     }
-    console.log(`[!] ${chalk.green(`${inputJumlahReff} Refferal is complete.. Check Refferal Kamu`)}`);
+    console.log(`[!] ${chalk.green(`${inputJumlahReff} Refferal is complete.. Check Refferal (${inputReffCode}) Kamu`)}`);
 })();
