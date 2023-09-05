@@ -95,21 +95,33 @@ const registerAccount = (Name, randomPhone, cookie) => new Promise((resolve, rej
 
 (async () => {
     //!Get Function Generate Name
-    const getName = await generateRandomIndonesianName();
-    const Name = getName.randomFirstName;
-    //!Get Function Generate Random Phone Number
-    const getPhoneNumber = await generateRandomPhoneNumber();
-    // console.log(getPhoneNumber)
-    // console.log(Name)
-    const resultCookie = await getCookie();
-    // console.log(resultCookie)
-    const generateCookie = resultCookie.cookie;
-    const cookie = generateCookie[0].split(";")[0];
+    // const getName = await generateRandomIndonesianName();
+    // const Name = getName.randomFirstName;
+    // //!Get Function Generate Random Phone Number
+    // const getPhoneNumber = await generateRandomPhoneNumber();
+    // // console.log(getPhoneNumber)
+    // // console.log(Name)
+    // const resultCookie = await getCookie();
+    // // console.log(resultCookie)
+    // const generateCookie = resultCookie.cookie;
+    // const cookie = generateCookie[0].split(";")[0];
     let inputJumlahReff;
-    if (cookie !== undefined) {
+    if (inputJumlahReff !== 0) {
         console.log(`[!] ${chalk.green(`Berhasil mendapatkan cookie`)}`)
         inputJumlahReff = readlineSync.question(`[?] Masukkan Jumlah reff : `);
         for (let i = 0; i < inputJumlahReff; i++) {
+            const getName = await generateRandomIndonesianName();
+            const Name = getName.randomFirstName;
+            //!Get Function Generate Random Phone Number
+            const getPhoneNumber = await generateRandomPhoneNumber();
+            // console.log(getPhoneNumber)
+            // console.log(Name)
+            const resultCookie = await getCookie();
+            // console.log(resultCookie)
+            const generateCookie = resultCookie.cookie;
+            const cookie = generateCookie[0].split(";")[0];
+            // console.log(cookie)
+
             console.log(`[!] ${chalk.yellow(`Procces Refferal ke-${i + 1}`)}`)
             const registAcc = await registerAccount(Name, getPhoneNumber, cookie);
             const resultBody = registAcc.body;
@@ -117,7 +129,7 @@ const registerAccount = (Name, randomPhone, cookie) => new Promise((resolve, rej
             const token = resultBody.data.token;
             console.log(`[!] Status Register : ${chalk.green(statusRegister)}!`)
             // console.log(token)
-            await delay(2000)
+            await delay(3000)
         }
     }
     console.log(`[!] ${chalk.green(`${inputJumlahReff} Refferal is complete.. Check Refferal Kamu`)}`);
